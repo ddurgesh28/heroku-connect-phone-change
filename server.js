@@ -10,8 +10,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.post('/update', function(req, res) {
-    var pool = new pg.Pool();
-    const pool = new Pool({
+    const pool = new pg.Pool({
         connectionString: process.env.DATABASE_URL
     })
 
