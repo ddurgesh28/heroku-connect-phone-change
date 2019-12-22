@@ -10,7 +10,9 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.post('/update', function(req, res) {
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    var pool = new pg.Pool();
+
+    pool.connect(process.env.DATABASE_URL, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
