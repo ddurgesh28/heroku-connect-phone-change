@@ -11,8 +11,11 @@ app.use(bodyParser.json());
 
 app.post('/update', function(req, res) {
     var pool = new pg.Pool();
+    const pool = new Pool({
+        connectionString: process.env.DATABASE_URL
+    })
 
-    pool.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    pool.connect(function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
